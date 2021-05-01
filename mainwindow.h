@@ -3,8 +3,12 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QStandardItemModel>
 #include <QString>
 #include <string>
+#include <vector>
+#include <set>
+#include "match.h"
 using namespace std;
 
 QT_BEGIN_NAMESPACE
@@ -24,11 +28,20 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    vector<Match> _matches;
 
-// my functions
 private:
+    // checking
     bool CheckFields();
 
     int GetInt(string s, string source);
+
+    // gui
+    void UpdateInformation();
+
+    // computing places in standings
+    set<pair<int, string>> ComputeStandings(vector<Match> m);
+
+    string CommandStat(string name, vector<Match> m, int &score);
 };
 #endif // MAINWINDOW_H

@@ -11,11 +11,11 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    thematch.cpp
+    match.cpp
 
 HEADERS += \
     mainwindow.h \
-    thematch.h
+    match.h
 
 FORMS += \
     mainwindow.ui

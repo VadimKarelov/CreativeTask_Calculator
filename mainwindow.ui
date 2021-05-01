@@ -47,24 +47,6 @@
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="1" column="1">
-        <widget class="QListView" name="listView_Matches">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QListView" name="listView_Table">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="0">
         <layout class="QGridLayout" name="gridLayout_2">
          <item row="6" column="0">
@@ -212,6 +194,24 @@
          </property>
          <property name="text">
           <string>Редактировать</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QListWidget" name="listWidget_Matches">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QListWidget" name="listWidget_Standings">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
          </property>
         </widget>
        </item>

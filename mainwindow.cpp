@@ -7,6 +7,13 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    // add background image
+    QPixmap bkgnd("D:\\Projects\\Qt\\C++\\Creative_Task_Calculator\\Resources\\background_image.jfif");
+    bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
+    QPalette palette;
+    palette.setBrush(QPalette::Background, bkgnd);
+    this->setPalette(palette);
 }
 
 MainWindow::~MainWindow()
@@ -28,8 +35,41 @@ void MainWindow::on_pushButton_Add_clicked()
             int s1 = stoi(ui->lineEdit_score1->text().toStdString());
             int s2 = stoi(ui->lineEdit_score2->text().toStdString());
             _matches.push_back(Match(c1, c2, s1, s2));
+
+            // check edit mod
+            if (editElement != -1)
+            {
+                _matches.erase(_matches.begin() + editElement);
+                editElement = -1;
+                ui->pushButton_Edit->setStyleSheet("QPushButton { background-color: grey; }\n"
+                                                   "QPushButton:enabled { background-color: rgb(85,255,255);"
+                                                   "border-radius: 8px; }\n");
+            }
+
             UpdateInformation();
         }
+    }
+}
+
+void MainWindow::on_pushButton_Edit_clicked()
+{
+    if (ui->listWidget_Matches->selectedItems().size() > 0)
+    {
+        // get element
+        QListWidgetItem *el = *(ui->listWidget_Matches->selectedItems().begin());
+        int ind = IndexOfMatch(_matches, el->text().toStdString());
+
+        // set data to fields to change information
+        ui->lineEdit_name1->setText(QString::fromStdString(_matches[ind].GetCommand1()));
+        ui->lineEdit_name2->setText(QString::fromStdString(_matches[ind].GetCommand2()));
+        ui->lineEdit_score1->setText(QString::number(_matches[ind].GetScore1()));
+        ui->lineEdit_score2->setText(QString::number(_matches[ind].GetScore2()));
+
+        // set flag to edit mod
+        editElement = ind;
+        ui->pushButton_Edit->setStyleSheet("QPushButton { background-color: grey; }\n"
+                                           "QPushButton:enabled { background-color: rgb(200,0,0);"
+                                           "border-radius: 8px; }\n");
     }
 }
 
@@ -91,8 +131,9 @@ void MainWindow::UpdateInformation()
 
     // add title row
     ui->listWidget_Standings->addItem("Имя (победы/ничьи/проигрыши)(голы/пропуски) (очки)");
-    set<pair<int, string>>::iterator it = table.begin();
-    for (int i = 0; i < table.size(); i++, it++)
+    set<pair<int, string>>::iterator it = table.end();
+    --it;
+    for (int i = 0; i < table.size(); i++, it--)
     {
          ui->listWidget_Standings->addItem(
                      QString::fromStdString(
@@ -108,19 +149,25 @@ set<pair<int, string>> MainWindow::ComputeStandings(vector<Match> m)
     vector<string> commands;
     for (int i = 0; i < m.size(); i++)
     {
+        // check command 1
         bool f = true;
         for (int j = 0; j < commands.size() && f; j++)
         {
-            if (commands[j] == m[i].GetCommand1())
-            {
-                commands.push_back(m[i].GetCommand1());
-                f = false;
-            }
-            if (commands[j] == m[i].GetCommand2())
-            {
-                commands.push_back(m[i].GetCommand2());
-                f = false;
-            }
+            f = m[i].GetCommand1() != commands[j];
+        }
+        if (f)
+        {
+            commands.push_back(m[i].GetCommand1());
+        }
+        // command 2
+        f = true;
+        for (int j = 0; j < commands.size() && f; j++)
+        {
+            f = m[i].GetCommand2() != commands[j];
+        }
+        if (f)
+        {
+            commands.push_back(m[i].GetCommand2());
         }
     }
 
@@ -135,6 +182,7 @@ set<pair<int, string>> MainWindow::ComputeStandings(vector<Match> m)
     return res;
 }
 
+// count stat for one command
 string MainWindow::CommandStat(string name, vector<Match> m, int &score)
 {
     int wins = 0, draws = 0, looses = 0, goals = 0, omissions = 0;
@@ -184,4 +232,16 @@ string MainWindow::CommandStat(string name, vector<Match> m, int &score)
 
     return name + "(" + to_string(wins) + "/" + to_string(draws) + "/" + to_string(looses) + ")("
             + to_string(goals) + "/" + to_string(omissions) + ")";
+}
+
+// find index of match in table
+int MainWindow::IndexOfMatch(vector<Match> m, string item)
+{
+    int res = -1;
+    for (int i = 0; i < m.size() && res == -1; i++)
+    {
+        if (item == m[i].ToString())
+            res = i;
+    }
+    return res;
 }

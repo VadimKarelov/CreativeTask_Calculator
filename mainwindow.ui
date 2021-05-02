@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
+    <width>1500</width>
     <height>600</height>
    </rect>
   </property>
@@ -18,13 +18,13 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>1000</width>
+    <width>1500</width>
     <height>600</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1000</width>
+    <width>1500</width>
     <height>600</height>
    </size>
   </property>
@@ -34,13 +34,16 @@
   <property name="autoFillBackground">
    <bool>false</bool>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
       <x>60</x>
       <y>40</y>
-      <width>901</width>
+      <width>1391</width>
       <height>491</height>
      </rect>
     </property>
@@ -56,6 +59,9 @@
              <pointsize>14</pointsize>
             </font>
            </property>
+           <property name="styleSheet">
+            <string notr="true">border-radius: 8px;</string>
+           </property>
           </widget>
          </item>
          <item row="1" column="1">
@@ -64,6 +70,10 @@
             <font>
              <pointsize>14</pointsize>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 170, 0);
+border-radius: 8px;</string>
            </property>
            <property name="text">
             <string>2 команда</string>
@@ -77,6 +87,10 @@
              <pointsize>14</pointsize>
             </font>
            </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(85, 255, 255);
+border-radius: 8px;</string>
+           </property>
            <property name="text">
             <string>Добавить</string>
            </property>
@@ -89,6 +103,9 @@
              <pointsize>14</pointsize>
             </font>
            </property>
+           <property name="styleSheet">
+            <string notr="true">border-radius: 8px;</string>
+           </property>
           </widget>
          </item>
          <item row="1" column="0">
@@ -97,6 +114,10 @@
             <font>
              <pointsize>14</pointsize>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 170, 0);
+border-radius: 8px;</string>
            </property>
            <property name="text">
             <string>1 команда</string>
@@ -110,6 +131,9 @@
              <pointsize>14</pointsize>
             </font>
            </property>
+           <property name="styleSheet">
+            <string notr="true">border-radius: 8px;</string>
+           </property>
           </widget>
          </item>
          <item row="3" column="0" colspan="2">
@@ -118,6 +142,10 @@
             <font>
              <pointsize>14</pointsize>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 170, 0);
+border-radius: 8px;</string>
            </property>
            <property name="text">
             <string>Счет</string>
@@ -144,6 +172,9 @@
              <pointsize>14</pointsize>
             </font>
            </property>
+           <property name="styleSheet">
+            <string notr="true">border-radius: 8px;</string>
+           </property>
           </widget>
          </item>
          <item row="0" column="0" colspan="2">
@@ -168,6 +199,10 @@
            <pointsize>14</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 170, 0);
+border-radius: 8px;</string>
+         </property>
          <property name="text">
           <string>Турнирная таблица</string>
          </property>
@@ -179,6 +214,10 @@
           <font>
            <pointsize>14</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 170, 0);
+border-radius: 8px;</string>
          </property>
          <property name="text">
           <string>Матчи</string>
@@ -192,6 +231,10 @@
            <pointsize>14</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(85, 255, 255);
+border-radius: 8px;</string>
+         </property>
          <property name="text">
           <string>Редактировать</string>
          </property>
@@ -204,6 +247,9 @@
            <pointsize>14</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">border-radius: 8px;</string>
+         </property>
         </widget>
        </item>
        <item row="1" column="2">
@@ -212,6 +258,9 @@
           <font>
            <pointsize>14</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-radius: 8px;</string>
          </property>
         </widget>
        </item>
@@ -225,7 +274,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
+     <width>1500</width>
      <height>20</height>
     </rect>
    </property>

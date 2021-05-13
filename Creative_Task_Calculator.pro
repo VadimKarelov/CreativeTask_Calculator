@@ -11,14 +11,17 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    match.cpp
+    match.cpp \
+    messagewindow.cpp
 
 HEADERS += \
     mainwindow.h \
-    match.h
+    match.h \
+    messagewindow.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    messagewindow.ui
 
 TRANSLATIONS += \
     Creative_Task_Calculator_ru_RU.ts

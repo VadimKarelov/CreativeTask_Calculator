@@ -9,6 +9,7 @@
 #include <vector>
 #include <set>
 #include "match.h"
+#include "messagewindow.h"
 using namespace std;
 
 QT_BEGIN_NAMESPACE

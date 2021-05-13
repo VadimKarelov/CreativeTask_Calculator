@@ -78,22 +78,38 @@ bool MainWindow::CheckFields()
 {
     if (ui->lineEdit_name1->text() == "")
     {
-        QMessageBox::warning(this, "Ошибка","Не указано имя команды 1");
+        //QMessageBox::warning(this, "Ошибка","Не указано имя команды 1");
+        MessageWindow w(this, "Не указано имя команды 1");
+        w.setModal(true);
+        w.show();
+        w.exec();
         return false;
     }
     if (ui->lineEdit_name2->text() == "")
     {
-        QMessageBox::warning(this, "Ошибка","Не указано имя команды 2");
+        //QMessageBox::warning(this, "Ошибка","Не указано имя команды 2");
+        MessageWindow w(this, "Не указано имя команды 2");
+        w.setModal(true);
+        w.show();
+        w.exec();
         return false;
     }
     if (ui->lineEdit_score1->text() == "")
     {
-        QMessageBox::warning(this, "Ошибка","Не указаны очки команды 1");
+        //QMessageBox::warning(this, "Ошибка","Не указаны очки команды 1");
+        MessageWindow w(this, "Не указаны очки команды 1");
+        w.setModal(true);
+        w.show();
+        w.exec();
         return false;
     }
     if (ui->lineEdit_score2->text() == "")
     {
-        QMessageBox::warning(this, "Ошибка","Не указаны очки команды 2");
+        //QMessageBox::warning(this, "Ошибка","Не указаны очки команды 2");
+        MessageWindow w(this, "Не указаны очки команды 2");
+        w.setModal(true);
+        w.show();
+        w.exec();
         return false;
     }
     return true;
@@ -108,8 +124,12 @@ int MainWindow::GetInt(string s, string source)
     }
     catch(...)
     {
-        QString t = QString::fromStdString("Не удалось распарсить " + source);
-        QMessageBox::warning(this, "Ошибка", t);
+        QString t = QString::fromStdString("Не удалось получить " + source);
+        //QMessageBox::warning(this, "Ошибка", t);
+        MessageWindow w(this, t);
+        w.setModal(true);
+        w.show();
+        w.exec();
     }
     return res;
 }
@@ -120,7 +140,7 @@ void MainWindow::UpdateInformation()
     // update matches list
     ui->listWidget_Matches->clear();
 
-    for (int i = 0; i < _matches.size(); i++)
+    for (unsigned int i = 0; i < _matches.size(); i++)
     {
         ui->listWidget_Matches->addItem(QString::fromStdString(_matches[i].ToString()));
     }
@@ -133,7 +153,7 @@ void MainWindow::UpdateInformation()
     ui->listWidget_Standings->addItem("Имя (победы/ничьи/проигрыши)(голы/пропуски) (очки)");
     set<pair<int, string>>::iterator it = table.end();
     --it;
-    for (int i = 0; i < table.size(); i++, it--)
+    for (unsigned int i = 0; i < table.size(); i++, it--)
     {
          ui->listWidget_Standings->addItem(
                      QString::fromStdString(
@@ -147,11 +167,11 @@ set<pair<int, string>> MainWindow::ComputeStandings(vector<Match> m)
 
     // find names of commands
     vector<string> commands;
-    for (int i = 0; i < m.size(); i++)
+    for (unsigned int i = 0; i < m.size(); i++)
     {
         // check command 1
         bool f = true;
-        for (int j = 0; j < commands.size() && f; j++)
+        for (unsigned int j = 0; j < commands.size() && f; j++)
         {
             f = m[i].GetCommand1() != commands[j];
         }
@@ -161,7 +181,7 @@ set<pair<int, string>> MainWindow::ComputeStandings(vector<Match> m)
         }
         // command 2
         f = true;
-        for (int j = 0; j < commands.size() && f; j++)
+        for (unsigned int j = 0; j < commands.size() && f; j++)
         {
             f = m[i].GetCommand2() != commands[j];
         }
@@ -172,7 +192,7 @@ set<pair<int, string>> MainWindow::ComputeStandings(vector<Match> m)
     }
 
     // compute stat and add command to table
-    for (int i = 0; i < commands.size(); i++)
+    for (unsigned int i = 0; i < commands.size(); i++)
     {
         int score = 0;
         string t = CommandStat(commands[i], m, score);
@@ -186,7 +206,7 @@ set<pair<int, string>> MainWindow::ComputeStandings(vector<Match> m)
 string MainWindow::CommandStat(string name, vector<Match> m, int &score)
 {
     int wins = 0, draws = 0, looses = 0, goals = 0, omissions = 0;
-    for (int i = 0; i < m.size(); i++)
+    for (unsigned int i = 0; i < m.size(); i++)
     {
         Match cur = m[i];
         if (cur.GetCommand1() == name)
@@ -228,7 +248,7 @@ string MainWindow::CommandStat(string name, vector<Match> m, int &score)
     }
 
     //(wins - looses) * 10 + goals - omissions;
-    score = wins * 3;
+    score = wins * 3 + draws;
 
     return name + "(" + to_string(wins) + "/" + to_string(draws) + "/" + to_string(looses) + ")("
             + to_string(goals) + "/" + to_string(omissions) + ")";
@@ -238,7 +258,7 @@ string MainWindow::CommandStat(string name, vector<Match> m, int &score)
 int MainWindow::IndexOfMatch(vector<Match> m, string item)
 {
     int res = -1;
-    for (int i = 0; i < m.size() && res == -1; i++)
+    for (unsigned int i = 0; i < m.size() && res == -1; i++)
     {
         if (item == m[i].ToString())
             res = i;

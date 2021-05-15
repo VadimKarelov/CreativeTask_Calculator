@@ -26,8 +26,8 @@ void MainWindow::on_pushButton_Add_clicked()
 {
     if (CheckFields())
     {
-        if (GetInt(ui->lineEdit_score1->text().toStdString(), "cчет команды 1") != -1 &&
-                GetInt(ui->lineEdit_score2->text().toStdString(), "cчет команды 2") != -1)
+        if (GetInt(ui->lineEdit_score1->text().toStdString(), "cчет команды 1") > -1 &&
+                GetInt(ui->lineEdit_score2->text().toStdString(), "cчет команды 2") > -1)
         {
             // add new match
             string c1 = ui->lineEdit_name1->text().toStdString();
@@ -121,6 +121,13 @@ int MainWindow::GetInt(string s, string source)
     try
     {
         res = stoi(s);
+        if (res < 0)
+        {
+            MessageWindow w(this, "Не может быть отрицательное количество очков");
+            w.setModal(true);
+            w.show();
+            w.exec();
+        }
     }
     catch(...)
     {
